@@ -33,5 +33,13 @@ import { RouterLink, RouterView } from 'vue-router'
     </div>
   </header>
 
-  <RouterView />
+  <main class="flex-fill">
+    <RouterView />
+  </main>
+
+  <footer class="container-fluid mt-4 bg-success-subtle">
+    <div class="container py-4">
+      © Luis Parrado - 2024 - Todos los derechos reservados
+    </div>
+  </footer>
 </template>
