@@ -8,7 +8,6 @@ const getProducts = async (page = 1) => {
   try {
     const response = await fetch(import.meta.env.VITE_BASE_URL + '/products?page=' + page)
     products.value = await response.json()
-    console.log(products.value)
   } catch (e) {
     console.log(e)
   }

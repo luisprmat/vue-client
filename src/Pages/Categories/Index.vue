@@ -1,5 +1,35 @@
+<script setup>
+import { onMounted, ref } from 'vue';
+
+const categories = ref({})
+
+const getCategories = async () => {
+  try {
+    const response = await fetch(import.meta.env.VITE_BASE_URL + '/categories')
+    categories.value = await response.json()
+  } catch (e) {
+    console.log(e)
+  }
+}
+onMounted(getCategories)
+</script>
+
 <template>
   <div class="container">
     <h2 class="display-6 my-4">Categorías</h2>
+
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-4">
+      <div v-for="category in categories.data" :key="category.id" class="col">
+        <div class="card h-100">
+          <img :src="category.photo_url ? category.photo_url : '/src/assets/no-image-available.png'" class="card-img-top"
+            :alt="category.name">
+          <div class="card-body">
+            <h5 class="card-title mb-2">{{ category.name }}</h5>
+            <h6 class="card-subtitle my-2 text-primary fst-italic">Productos: {{ category.products }}</h6>
+            <p class="card-text">ID: {{ category.id }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
