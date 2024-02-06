@@ -1,18 +1,11 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted } from 'vue';
+import { useCategories } from '@/stores/categories';
 import noImage from '@/assets/no-image-available.png';
 
-const categories = ref({})
+const store = useCategories()
 
-const getCategories = async () => {
-  try {
-    const response = await fetch(import.meta.env.VITE_BASE_URL + '/categories')
-    categories.value = await response.json()
-  } catch (e) {
-    console.log(e)
-  }
-}
-onMounted(getCategories)
+onMounted(store.getCategories)
 </script>
 
 <template>
@@ -20,7 +13,7 @@ onMounted(getCategories)
     <h2 class="display-6 my-4">Categorías</h2>
 
     <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-4">
-      <div v-for="category in categories.data" :key="category.id" class="col">
+      <div v-for="category in store.categories.data" :key="category.id" class="col">
         <div class="card h-100">
           <img :src="category.photo_url ? category.photo_url : noImage" class="card-img-top" :alt="category.name">
           <div class="card-body">
