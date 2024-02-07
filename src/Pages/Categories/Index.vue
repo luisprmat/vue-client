@@ -24,7 +24,8 @@ onMounted(store.getCategories)
           <div class="card-footer text-body-secondary d-flex justify-content-between">
             <button class="btn btn-outline-primary btn-sm"><i class="bi bi-pencil-square"></i>
             </button>
-            <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i>
+            <button @click.prevent="store.deleteCategory(category.id)" class="btn btn-outline-danger btn-sm"><i
+                class="bi bi-trash"></i>
             </button>
           </div>
         </div>
