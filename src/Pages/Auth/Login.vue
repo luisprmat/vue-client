@@ -49,7 +49,10 @@ onBeforeUnmount(store.resetForm)
               </div>
 
               <div class="text-center text-lg-start mt-4 pt-2">
-                <button class="btn btn-primary btn-lg px-5">Iniciar sesión</button>
+                <button class="btn btn-primary btn-lg px-4" :disabled="store.loading">
+                  <span v-if="store.loading" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                  <span>{{ store.loading ? ' Enviando...' : 'Iniciar sesión' }}</span>
+                </button>
               </div>
             </form>
           </div>
