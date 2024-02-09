@@ -34,6 +34,11 @@ const router = createRouter({
       name: 'categories.index',
       component: () => import('@/Pages/Categories/Index.vue'),
       beforeEnter: auth,
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: () => import('@/Pages/Errors/NotFound.vue'),
     }
   ]
 })
