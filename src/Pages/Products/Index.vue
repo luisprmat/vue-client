@@ -1,13 +1,14 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import { Bootstrap5Pagination } from 'laravel-vue-pagination';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
 const products = ref({})
 
 const getProducts = async (page = 1) => {
   try {
-    const response = await fetch(import.meta.env.VITE_BASE_URL + '/api/products?page=' + page)
-    products.value = await response.json()
+    const response = await axios.get(`/api/products?page=${page}`)
+    products.value = response.data
   } catch (e) {
     console.log(e)
   }
@@ -16,7 +17,7 @@ onMounted(getProducts)
 </script>
 
 <template>
-  <div class="container">
+  <AuthenticatedLayout>
     <h2 class="display-6 my-4">Productos</h2>
 
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
@@ -33,7 +34,7 @@ onMounted(getProducts)
       </div>
     </div>
 
-    <div class="my-4 d-flex flex-column flex-md-row justify-content-md-between align-items-md-baseline">
+    <div class="mt-4 d-flex flex-column flex-md-row justify-content-md-between align-items-md-baseline">
       <div class="order-last order-md-first">
         <p class="text-sm text-gray-700 leading-5 dark:text-gray-200">
           <span>Mostrando </span>
@@ -47,5 +48,5 @@ onMounted(getProducts)
       </div>
       <Bootstrap5Pagination :data="products" @pagination-change-page="getProducts" />
     </div>
-  </div>
+  </AuthenticatedLayout>
 </template>

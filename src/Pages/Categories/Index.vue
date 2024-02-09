@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted } from 'vue';
 import { useCategories } from '@/stores/categories';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import noImage from '@/assets/no-image-available.png';
 
 const store = useCategories()
@@ -9,7 +10,7 @@ onMounted(store.getCategories)
 </script>
 
 <template>
-  <div class="container">
+  <AuthenticatedLayout>
     <h2 class="display-6 my-4">Categorías</h2>
 
     <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-4">
@@ -31,5 +32,5 @@ onMounted(store.getCategories)
         </div>
       </div>
     </div>
-  </div>
+  </AuthenticatedLayout>
 </template>

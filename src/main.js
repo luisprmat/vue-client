@@ -1,3 +1,4 @@
+import '@/bootstrap'
 import '@/assets/scss/main.scss'
 
 // Import all of Bootstrap's JS
